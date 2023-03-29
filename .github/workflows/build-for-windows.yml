@@ -15,11 +15,18 @@ jobs:
         working-directory: ./GxUtils
         
     steps:
+    - name: Check out project
     - uses: actions/checkout@v3
       with:
         submodules: 'true'
         
-    - uses: microsoft/setup-msbuild@v1.0.2
+     - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '4.6.1'
+        
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.0.2
     
     - name: Build the project
       run: msbuild /P:Configuration=Release,DebugSymbols=false,DebugType=None,OutputPath=./out
