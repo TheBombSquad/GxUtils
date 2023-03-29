@@ -40,6 +40,12 @@ jobs:
         copy /Y ./LibGxFormat/out ./artifacts
         copy /Y ./LibGxTexture/out ./artifacts
         copy /Y ./TreeViewMS/out ./artifacts
+        copy /Y ./CHANGES.txt
+        copy /Y ./COPYING.txt
+        copy /Y ./CREDITS.txt
+        copy /Y ./MiscUtilLicense.txt
+        copy /Y ./OpenTkLicense.txt
+        copy /Y ./README.md
         
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.2
