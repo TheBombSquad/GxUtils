@@ -16,17 +16,17 @@ jobs:
         
     steps:
     - name: Check out project
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
         submodules: 'true'
         
-     - name: Setup .NET SDK
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
+        # Semantic version range syntax or exact version of a dotnet version
         dotnet-version: '4.6.1'
         
-    - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1.0.2
+    - uses: microsoft/setup-msbuild@v1.0.2
     
     - name: Build the project
       run: msbuild /P:Configuration=Release,DebugSymbols=false,DebugType=None,OutputPath=./out
