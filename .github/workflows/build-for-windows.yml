@@ -12,7 +12,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./smblevelworkshop2
+        working-directory: ./GxUtils
         
     steps:
     - uses: actions/checkout@v3
