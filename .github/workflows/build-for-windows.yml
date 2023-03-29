@@ -1,0 +1,40 @@
+name: Build for Windows
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: 'true'
+        
+    - uses: microsoft/setup-msbuild@v1.0.2
+    
+    - name: Build the project
+      run: msbuild /P:Configuration=Release,DebugSymbols=false,DebugType=None,OutputPath=./out
+      
+    - name: Collect artifacts
+      run: |
+        mkdir ./artifacts
+        copy /Y ./GxExtender/out ./artifacts
+        copy /Y ./GxLoadSaveTestApp/out ./artifacts
+        copy /Y ./GxModelViewer/out ./artifacts
+        copy /Y ./GxModelViewer_WinFormsExt/out ./artifacts
+        copy /Y ./LibGxFormat/out ./artifacts
+        copy /Y ./LibGxTexture/out ./artifacts
+        copy /Y ./TreeViewMS/out ./artifacts
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        # Artifact name
+        name: gx-windows
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ./artifacts
