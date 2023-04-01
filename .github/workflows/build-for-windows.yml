@@ -43,7 +43,7 @@ jobs:
         
     - name: Get commit number
       id: get_commit_number
-      run: echo "COMMIT_NUMBER=$(git rev-list --all --count)" >> $GITHUB_OUTPUT
+      run: echo "COMMIT_NUMBER=$(git rev-list --all --count)" >> $env:GITHUB_OUTPUT
         
     - name: Get version number
       id: get_version_number
@@ -51,7 +51,7 @@ jobs:
         major: "1.0"
         seperator: "-"
         commit: ${{ steps.get_commit_number.outputs.COMMIT_NUMBER }}
-      run: echo "VERSION_NUMBER=$major$seperator-$commit" >> $GITHUB_OUTPUT
+      run: echo "VERSION_NUMBER=$major$seperator-$commit" >> $env:GITHUB_OUTPUT
       
     - name: Create release
       id: create_release
