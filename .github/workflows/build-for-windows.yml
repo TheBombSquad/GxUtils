@@ -52,7 +52,7 @@ jobs:
         major: "1.0"
         seperator: "-"
         commit: ${{ steps.get_commit_number.outputs.commit_number }}
-      run: echo "version_number=$major$seperator-$commit" >> $env:GITHUB_OUTPUT
+      run: echo "version_number=$env:major$env:seperator-$env:commit" >> $env:GITHUB_OUTPUT
       
     - name: Create release
       id: create_release
