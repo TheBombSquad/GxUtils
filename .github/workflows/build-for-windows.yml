@@ -28,20 +28,20 @@ jobs:
     - name: Collect artifacts
       run: |
         mkdir .\artifacts
-        copy -Force -Path .\GxExtender\out .\artifacts
-        copy -Force -Path .\GxLoadSaveTestApp\out -Destination .\artifacts
-        copy -Force -Path .\GxModelViewer\out -Destination .\artifacts
-        copy -Force -Path .\GxModelViewer_WinFormsExt\out -Destination .\artifacts
-        copy -Force -Path .\LibGxFormat\out -Destination .\artifacts
-        copy -Force -Path .\LibGxTexture\out -Destination .\artifacts
-        copy -Force -Path .\TreeViewMS\out -Destination .\artifacts
+        copy -Force -Path .\GxExtender\out\*  .\artifacts
+        copy -Force -Path .\GxLoadSaveTestApp\out\* -Destination .\artifacts
+        copy -Force -Path .\GxModelViewer\out\* -Destination .\artifacts
+        copy -Force -Path .\GxModelViewer_WinFormsExt\out\* -Destination .\artifacts
+        copy -Force -Path .\LibGxFormat\out\* -Destination .\artifacts
+        copy -Force -Path .\LibGxTexture\out\* -Destination .\artifacts
+        copy -Force -Path .\TreeViewMS\out\* -Destination .\artifacts
         copy -Force -Path ..\CHANGES.txt -Destination .\artifacts
         copy -Force -Path ..\COPYING.txt -Destination .\artifacts
         copy -Force -Path ..\CREDITS.txt -Destination .\artifacts
         copy -Force -Path ..\MiscUtilLicense.txt -Destination .\artifacts
         copy -Force -Path ..\OpenTkLicense.txt -Destination .\artifacts
         copy -Force -Path ..\README.md -Destination .\artifacts
-        7z.exe a -r ..\GxUtils-Windows.zip .\artifacts
+        7z.exe a -r ..\GxUtils-Windows.zip .\artifacts\*
         
     - name: Get commit number
       id: get_commit_number
