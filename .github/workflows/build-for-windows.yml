@@ -1,0 +1,68 @@
+name: Build for Windows
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    defaults:
+      run:
+        working-directory: ./GxUtils
+        
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: 'true'
+        fetch-depth: 0
+        
+    - uses: microsoft/setup-msbuild@v1.1
+    
+    - name: Build the project
+      run: msbuild /M /P:Configuration=Release,DebugSymbols=false,DebugType=None,OutputPath=./out
+      
+    - name: Collect artifacts
+      run: |
+        mkdir .\artifacts
+        mkdir .\artifacts\Presets
+        copy -Force -Path .\GxExtender\out\*  .\artifacts
+        copy -Force -Path .\GxLoadSaveTestApp\out\* -Destination .\artifacts
+        copy -Force -Path .\GxModelViewer\out\* -Destination .\artifacts
+        copy -Force -Path .\GxModelViewer_WinFormsExt\out\* -Destination .\artifacts
+        copy -Force -Path .\LibGxFormat\out\* -Destination .\artifacts
+        copy -Force -Path .\LibGxTexture\out\* -Destination .\artifacts
+        copy -Force -Path .\TreeViewMS\out\* -Destination .\artifacts
+        copy -Force -Path ..\CHANGES.txt -Destination .\artifacts
+        copy -Force -Path ..\COPYING.txt -Destination .\artifacts
+        copy -Force -Path ..\CREDITS.txt -Destination .\artifacts
+        copy -Force -Path ..\MiscUtilLicense.txt -Destination .\artifacts
+        copy -Force -Path ..\OpenTkLicense.txt -Destination .\artifacts
+        copy -Force -Path ..\README.md -Destination .\artifacts
+        7z.exe a ..\GxUtils-Windows.zip .\artifacts\* "-x!*.config"
+        
+    - name: Get commit number
+      id: get_commit_number
+      run: echo "commit_number=$(git rev-list --all --count)" >> $env:GITHUB_OUTPUT
+        
+    - name: Get version number
+      id: get_version_number
+      env:
+        major: "1.0"
+        seperator: "-"
+        commit: ${{ steps.get_commit_number.outputs.commit_number }}
+      run: echo "version_number=$env:major$env:seperator$env:commit" >> $env:GITHUB_OUTPUT
+      
+    - name: Create release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: ${{ steps.get_version_number.outputs.version_number }}
+        draft: false
+        prerelease: false
+        files: |
+          ./GxUtils-Windows.zip
