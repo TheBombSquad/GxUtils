@@ -27,22 +27,21 @@ jobs:
       
     - name: Collect artifacts
       run: |
-        cd ..
         mkdir .\artifacts
-        copy -Force -Path .\GxUtils\GxExtender\out .\artifacts
-        copy -Force -Path .\GxUtils\GxLoadSaveTestApp\out -Destination .\artifacts
-        copy -Force -Path .\GxUtils\GxModelViewer\out -Destination .\artifacts
-        copy -Force -Path .\GxUtils\GxModelViewer_WinFormsExt\out -Destination .\artifacts
-        copy -Force -Path .\GxUtils\LibGxFormat\out -Destination .\artifacts
-        copy -Force -Path .\GxUtils\LibGxTexture\out -Destination .\artifacts
-        copy -Force -Path .\GxUtils\TreeViewMS\out -Destination .\artifacts
+        copy -Force -Path .\GxExtender\out .\artifacts
+        copy -Force -Path .\GxLoadSaveTestApp\out -Destination .\artifacts
+        copy -Force -Path .\GxModelViewer\out -Destination .\artifacts
+        copy -Force -Path .\GxModelViewer_WinFormsExt\out -Destination .\artifacts
+        copy -Force -Path .\LibGxFormat\out -Destination .\artifacts
+        copy -Force -Path .\LibGxTexture\out -Destination .\artifacts
+        copy -Force -Path .\TreeViewMS\out -Destination .\artifacts
         copy -Force -Path ..\CHANGES.txt -Destination .\artifacts
         copy -Force -Path ..\COPYING.txt -Destination .\artifacts
         copy -Force -Path ..\CREDITS.txt -Destination .\artifacts
         copy -Force -Path ..\MiscUtilLicense.txt -Destination .\artifacts
         copy -Force -Path ..\OpenTkLicense.txt -Destination .\artifacts
         copy -Force -Path ..\README.md -Destination .\artifacts
-        7z.exe a -r GxUtils-Windows.zip .\artifacts
+        7z.exe a -r ..\GxUtils-Windows.zip .\artifacts
         
     - name: Get commit number
       id: get_commit_number
@@ -66,6 +65,7 @@ jobs:
         release_name: ${{ steps.get_version_number.outputs.version_number }}
         draft: false
         prerelease: false
+
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
