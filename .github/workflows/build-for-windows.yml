@@ -20,7 +20,7 @@ jobs:
         submodules: 'true'
         fetch-depth: 0
         
-    - uses: microsoft/setup-msbuild@v1.0.2
+    - uses: microsoft/setup-msbuild@v1.1
     
     - name: Build the project
       run: msbuild /M /P:Configuration=Release,DebugSymbols=false,DebugType=None,OutputPath=./out
@@ -58,23 +58,11 @@ jobs:
       
     - name: Create release
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
+        token: ${{ secrets.GITHUB_TOKEN }}
         tag_name: ${{ steps.get_version_number.outputs.version_number }}
-        release_name: ${{ steps.get_version_number.outputs.version_number }}
         draft: false
         prerelease: false
-
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} 
-        asset_path: ./GxUtils-Windows.zip
-        asset_name: GxUtils-Windows.zip
-        asset_content_type: application/zip
-        
+        files: |
+          ./GxUtils-Windows.zip
