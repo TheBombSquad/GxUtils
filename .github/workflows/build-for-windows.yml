@@ -28,6 +28,7 @@ jobs:
     - name: Collect artifacts
       run: |
         mkdir .\artifacts
+        mkdir .\artifacts\Presets
         copy -Force -Path .\GxExtender\out\*  .\artifacts
         copy -Force -Path .\GxLoadSaveTestApp\out\* -Destination .\artifacts
         copy -Force -Path .\GxModelViewer\out\* -Destination .\artifacts
@@ -41,7 +42,7 @@ jobs:
         copy -Force -Path ..\MiscUtilLicense.txt -Destination .\artifacts
         copy -Force -Path ..\OpenTkLicense.txt -Destination .\artifacts
         copy -Force -Path ..\README.md -Destination .\artifacts
-        7z.exe a -r ..\GxUtils-Windows.zip .\artifacts\*
+        7z.exe a -r -x!*.config ..\GxUtils-Windows.zip .\artifacts\*
         
     - name: Get commit number
       id: get_commit_number
