@@ -1,10 +1,20 @@
-# GxModelViewer - A F-Zero GX model viewer and editor
+<div align=center>
+<h1><img src=https://user-images.githubusercontent.com/35253266/229387161-153573b7-1dcb-40c3-bfd3-c00bc88812dd.jpg width="24"></img> GxModelViewer</h1>
+</div>
+<div align="center"><strong><i>A F-Zero GX and Super Monkey Ball model editor and viewer</i></strong></div>
+<br/>
+<div align="center"><img src=https://github.com/TheBombsquad/GxUtils/actions/workflows/build-for-windows.yml/badge.svg></div>
+<div align="center"><a href=https://github.com/TheBombSquad/GxUtils/releases/latest><b><i>Download Latest Release - Windows</i></b></a></div>
 
 ## Introduction
+<img src=https://user-images.githubusercontent.com/35253266/229385265-ef70de21-29e1-46c4-b8ac-76ceeabbafa8.png width="400" align="right">
 
-This is a fork of GX Model Viewer that features several improvements over the original version. The complete list of changes is found within CHANGES.txt.
+GX Model Viewer is a tool for working with GMA model and TPL texture files. It allows you to create new GMA and TPL files, as well as modify existing ones, assisting in the modification of games such as F-Zero GX and Super Monkey Ball 1 and 2. You can use this tool to assist with tasks such as importing custom level models or backgrounds into these games, or ripping the original textures from these games. GX Model Viewer supports graphical editing, as well as command line operation for integration into automated workflows.
 
-This specific fork of GX Model Viewer was developed for use with, and tested with the Super Monkey Ball series. No testing has been done with F-Zero GX.
+
+This is an updated version of the original GX Model Viewer that features several improvements over the original version by [bobjrsenior](https://github.com/bobjrsenior/). The complete list of changes made since the original version can be found within CHANGES.txt.
+
+This specific version of GX Model Viewer was developed for use with, and tested with the Super Monkey Ball series. No testing has been done with F-Zero GX, however, it should still work.
 
 In short, the following major features have been added:
 
@@ -25,7 +35,7 @@ These features, respectively, enable you to:
 * Use pre-generated mipmaps or vanilla textures without having to tediously import each mipmap level
 * Add new materials to a model without having to use workarounds in your 3D modelling program
 * Add new textures without having to use workaround in your 3D modelling program, as well as the ability to decrease the filesize of a TPL
-* Modify the story mode/pratice mode/replay preview image TPL file in the Super Monkey Ball series
+* Modify the story mode/practice mode/replay preview image TPL file in the Super Monkey Ball series
 * Quickly import large amounts of textures without having to tediously import them one-by-one
 * Add specular maps or other effects to models
 * Reduce the size of a GMA file, remove unwanted models, move models without having to resort to exporting the GMA to a 3D modelling program
@@ -34,14 +44,20 @@ These features, respectively, enable you to:
 	
 Most of these new features are available through the context menus, found by right-clicking on items in the model, material, or texture tabs. 
 
-## Downloads
+## Downloads & Releases
 
-Windows binaries can be downloaded here:
-
-https://github.com/TheBombSquad/GxUtils/releases
+The latest version can be downloaded [at this link](https://github.com/TheBombSquad/GxUtils/releases/latest) - or by checking the releases section on the right side of the page.
 
 For Linux users, GX Model Viewer should work on the latest version of Wine without any special setup required. 
 It can also be built and run using Mono, but all references to `GetConsoleWindow()` need to be commented out first.
+Releases including Linux binaries are planned for the future.
+
+
+## Documentation
+
+More thorough documentation of this tool is planned for the future.
+
+The Super Monkey Ball custom level guide provides some documentation on using the tool for texture ripping, [in this linked section.](https://docs.google.com/document/d/194QZxrimkjHEzSSMKbafs86PnmiYmFBZUnoaEnks4es/edit#heading=h.euh4ifbsdjd7)
 
 ## Headerless TPL modification
 
@@ -68,7 +84,7 @@ do not have to be isolated from other image files. Ensure that the last two char
 are " 0" or "_0". Select the texture in the Textures tab (Texture 1, Texture 2, etc), and press the Import
 button. Make sure you do not have any specific mipmap level selected. Select the file, then select the file 
 format. All of the files should be imported as the respective mipmap levels. If you have any issues, make
-sure tha the files are properly named, and in the correct order.
+sure that the files are properly named, and in the correct order.
 
 If you do not wish to import mipmap levels, and would rather have GX Model Viewer generate them, import the
 texture as you normally would. Just ensure that the filename does not end in " 0" or "_0", or only one mipmap level
@@ -82,12 +98,12 @@ exported to the specified folder.
 GX Model Viewer supports command line usage. It isn't as feature complete as the UI, but it
 has what most people need.
 
-The command line can be used with just command line flags or in interactive mode. Interative
+The command line can be used with just command line flags or in interactive mode. Interactive
 mode is activated with the -interactive flag and cause commands to be read from standard input.
 It reads one line of input at a time and tries to split it into commands/arguments. Then operates
 on them just like command line flags. This means multiple commands can be in one line of input.
 
-The only command difference in flags between non-interactive andmode  interactive mode is that the -interactive
+The only command difference in flags between non-interactive and interactive mode is that the -interactive
 flag is not available in interactive mode and the -quit flag is not available in non-interactive mode.
 
 ### Usage:
@@ -172,3 +188,4 @@ and it shouldn't have any negative effect in practice, it's unlikely to be ever 
 ### (Not a bug) On Super Monkey Ball, previe*.tpl fails the TPL repacking test
 This is because those files are actually headerless image files, instead of TPL files.
 They aren't supported to pass the TPL repacking test.
+
