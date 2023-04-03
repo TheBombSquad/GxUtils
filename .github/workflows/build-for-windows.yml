@@ -46,7 +46,7 @@ jobs:
         
     - name: Get commit number
       id: get_commit_number
-      run: echo "commit_number=$(git rev-list --all --count)" >> $env:GITHUB_OUTPUT
+      run: echo "commit_number=$(git rev-list master --count)" >> $env:GITHUB_OUTPUT
         
     - name: Get version number
       id: get_version_number
