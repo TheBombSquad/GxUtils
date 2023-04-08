@@ -10,7 +10,7 @@ namespace GxModelViewer
 
     class MainClass
 	{
-    #if !__MonoCS__
+    #if !IS_MONO_BUILD
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetConsoleWindow();
 
@@ -52,7 +52,7 @@ namespace GxModelViewer
             
             if (args.Length == 0)
             {
-                #if !__MonoCS__
+                #if !IS_MONO_BUILD
                 var handle = GetConsoleWindow();
                 ShowWindow(handle, SW_HIDE);
                 #endif
