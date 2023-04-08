@@ -3,8 +3,11 @@
 </div>
 <div align="center"><strong><i>A F-Zero GX and Super Monkey Ball model editor and viewer</i></strong></div>
 <br/>
-<div align="center"><img src=https://github.com/TheBombsquad/GxUtils/actions/workflows/build-for-windows.yml/badge.svg></div>
-<div align="center"><a href=https://github.com/TheBombSquad/GxUtils/releases/latest><b><i>Download Latest Release - Windows</i></b></a></div>
+<div align="center">
+<img src=https://github.com/TheBombsquad/GxUtils/actions/workflows/build-for-windows.yml/badge.svg>
+<img src=https://github.com/TheBombsquad/GxUtils/actions/workflows/build-for-linux.yml/badge.svg>
+</div>
+<div align="center"><a href=https://github.com/TheBombSquad/GxUtils/releases/latest><b><i>Download Latest Release - Windows/Linux</i></b></a></div>
 
 ## Introduction
 <img src=https://user-images.githubusercontent.com/35253266/229385265-ef70de21-29e1-46c4-b8ac-76ceeabbafa8.png width="400" align="right">
@@ -48,10 +51,9 @@ Most of these new features are available through the context menus, found by rig
 
 The latest version can be downloaded [at this link](https://github.com/TheBombSquad/GxUtils/releases/latest) - or by checking the releases section on the right side of the page.
 
-For Linux users, GX Model Viewer should work on the latest version of Wine without any special setup required. 
-It can also be built and run using Mono, but all references to `GetConsoleWindow()` need to be commented out first.
-Releases including Linux binaries are planned for the future.
+Both Windows and Linux binaries are provided.
 
+You can also build it yourself, using Visual Studio on Windows with .NET Framework 4.8 installed, or Mono on Linux. The build process is striaghtforward: on Windows, open the `GxUtils.sln` file in Visual Studio, then build the solution. On Linux, download Mono through your package manager and run either `xbuild` or `msbuild` in the `GxUtils` folder, then check each project for the respective output files. You can also use the Rider IDE to build the project on Linux, if your version of msbuild supoprts .NET Framework 4.8.
 
 ## Documentation
 

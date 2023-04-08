@@ -1,0 +1,62 @@
+name: Build for Linux
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./GxUtils
+        
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: 'true'
+        fetch-depth: 0
+        
+    - name: Build the project
+      run: msbuild /M /P:Configuration='Release - Mono',DebugSymbols=false,DebugType=None,OutputPath=./out
+      
+    - name: Collect artifacts
+      run: |
+        mkdir ./artifacts
+        mkdir ./artifacts/Presets
+        mkbundle -o ./artifacts/GxModelViewer --simple ./GxModelViewer/out/GxModelViewer.exe -L ./GxModelViewer/out/ --no-machine-config --no-config
+        mkbundle -o ./artifacts/GxExtender --simple ./GxExtender/out/GxExtender.exe -L ./GxExtender/out/ --no-machine-config --no-config
+        mkbundle -o ./artifacts/GxLoadSaveTestApp --simple ./GxLoadSaveTestApp/out/GxLoadSaveTestApp.exe -L ./GxLoadSaveTestApp/out/ --no-machine-config --no-config
+        cp ../CHANGES.txt ./artifacts
+        cp ../COPYING.txt ./artifacts
+        cp ../CREDITS.txt ./artifacts
+        cp ../MiscUtilLicense.txt ./artifacts
+        cp ../OpenTkLicense.txt ./artifacts
+        cp ../README.md ./artifacts
+        tar -czf ../GxUtils-Linux.tar.gz -C ./artifacts .
+        
+    - name: Get commit number
+      id: get_commit_number
+      run: echo "commit_number=$(git rev-list master --count)" >> $GITHUB_OUTPUT
+        
+    - name: Get version number
+      id: get_version_number
+      env:
+        major: "1.0"
+        seperator: "-"
+        commit: ${{ steps.get_commit_number.outputs.commit_number }}
+      run: echo "version_number=$major$seperator$commit" >> $GITHUB_OUTPUT
+      
+    - name: Create release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: ${{ steps.get_version_number.outputs.version_number }}
+        draft: false
+        prerelease: false
+        files: |
+          ./GxUtils-Linux.tar.gz
