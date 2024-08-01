@@ -35,7 +35,7 @@ namespace LibGxFormat.Gma
         [Flags]
         public enum RenderFlag
         {
-            UnkFlag01 = 0x01,
+            Unshaded = 0x01,
             /// <summary>
             /// All faces on this mesh are two-sided. Otherwise, faces are one-sided (only the front-facing side is shown).
             /// 
@@ -48,11 +48,11 @@ namespace LibGxFormat.Gma
             /// which is what makes it to be shown on both sides.
             /// </summary>
             TwoSided = 0x02,
-            UnkFlag04 = 0x04,
-            UnkFlag08 = 0x08,
-            UnkFlag10 = 0x10,
-            UnkFlag20 = 0x20,
-            UnkFlag40 = 0x40,
+            UnaffectedByFog = 0x04,
+            VertexShading = 0x08,
+            VertexPaint = 0x10,
+            ScreenBlend = 0x20,
+            AdditiveBlend = 0x40,
             UnkFlag200 = 0x200,
         }
         public MeshLayer Layer { get; set; }
@@ -139,6 +139,11 @@ namespace LibGxFormat.Gma
             if (Unk10 != 0xFF) Layer = MeshLayer.Layer2;
 
             if (mesh.Material.Unshaded) RenderFlags |= (RenderFlag)0x1;
+            if (mesh.Material.TwoSided) RenderFlags |= (RenderFlag)0x2;
+            if (mesh.Material.UnaffectedByFog) RenderFlags |= (RenderFlag)0x4;
+            if (mesh.Material.VertexShaded) RenderFlags |= (RenderFlag)0x8;
+            if (mesh.Material.ScreenBlend) RenderFlags |= (RenderFlag)0x20;
+            if (mesh.Material.AdditiveBlend) RenderFlags |= (RenderFlag)0x40;
 
             Match meshPreset = Regex.Match(mesh.Material.Name, @"(?<=MESH_)[^\]]*");
 
