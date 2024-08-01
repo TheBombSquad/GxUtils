@@ -32,6 +32,36 @@ namespace LibGxFormat.ModelLoader
             set;
         }
 
+        public bool TwoSided
+        {
+            get;
+            set;
+        }
+
+        public bool NoFog
+        {
+            get;
+            set;
+        }
+
+        public bool VertexShading
+        {
+            get;
+            set;
+        }
+
+        public bool ScreenBlend
+        {
+            get;
+            set;
+        }
+
+        public bool AdditiveBlend
+        {
+            get;
+            set;
+        }
+
         public string Name
         {
             get;
@@ -43,6 +73,11 @@ namespace LibGxFormat.ModelLoader
             this.DiffuseTextureMap = null;
             this.Transparency = 1.0f;
             this.Unshaded = false;
+            this.TwoSided = false;
+            this.NoFog = false;
+            this.VertexShading = false;
+            this.ScreenBlend = false;
+            this.AdditiveBlend = false;
             this.Name = "";
         }
     }
