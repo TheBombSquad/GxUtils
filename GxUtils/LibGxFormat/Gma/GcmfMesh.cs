@@ -141,7 +141,7 @@ namespace LibGxFormat.Gma
             if (mesh.Material.Unshaded) RenderFlags |= (RenderFlag)0x1;
             if (mesh.Material.TwoSided) RenderFlags |= (RenderFlag)0x2;
             if (mesh.Material.NoFog) RenderFlags |= (RenderFlag)0x4;
-            if (mesh.Material.VertexShaded) RenderFlags |= (RenderFlag)0x8;
+            if (mesh.Material.VertexShading) RenderFlags |= (RenderFlag)0x8;
             if (mesh.Material.ScreenBlend) RenderFlags |= (RenderFlag)0x20;
             if (mesh.Material.AdditiveBlend) RenderFlags |= (RenderFlag)0x40;
 
