@@ -317,13 +317,13 @@ namespace LibGxFormat.Gma
             Layer = newLayer;
 
             uint renderFlagsUint = input.ReadUInt32();
-            if ((renderFlagsUint & ~(uint)(RenderFlag.UnkFlag01 |
+            if ((renderFlagsUint & ~(uint)(RenderFlag.Unshaded |
                                            RenderFlag.TwoSided |
-                                           RenderFlag.UnkFlag04 |
-                                           RenderFlag.UnkFlag08 |
-                                           RenderFlag.UnkFlag10 |
-                                           RenderFlag.UnkFlag20 |
-                                           RenderFlag.UnkFlag40 |
+                                           RenderFlag.NoFog |
+                                           RenderFlag.VertexShading |
+                                           RenderFlag.VertexPaint |
+                                           RenderFlag.ScreenBlend |
+                                           RenderFlag.AdditiveBlend |
                                            RenderFlag.UnkFlag200)) != 0)
             {
                 throw new InvalidOperationException("Unknown RenderFlags set.");
