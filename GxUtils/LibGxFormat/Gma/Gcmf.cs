@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -123,24 +123,27 @@ namespace LibGxFormat.Gma
                     modelMaterialMapping.Add(mat, Materials.Count);
 
                     GcmfMaterial NewMaterial = new GcmfMaterial(mat, modelTextureMapping, presetFolder);
-                 
-                    Match flagPreset = Regex.Match(mat.Name, @"(?<=MATFLAG_)[^\]]*");
 
-                    if (flagPreset.Success)
+                    MatchCollection flagPresets = Regex.Matches(mat.Name, @"(?<=MATFLAG_)[^\]]*");
+
+                    foreach (Match flagPreset in flagPresets)
                     {
-                        switch (flagPreset.Value)
+                        if (flagPreset.Success)
                         {
-                            case "SCROLL":
-                                NewMaterial.Flags |= 0x20000;
-                                break;
+                            switch (flagPreset.Value)
+                            {
+                                case "SCROLL":
+                                    NewMaterial.Flags |= 0x20000;
+                                    break;
 
-                            case "MASK":
-                                NewMaterial.Flags |= 0x10;
-                                NewMaterial.Unk10 = 0x00000000;
-                                break;
-       
-                            default:
-                                break;
+                                case "MASK":
+                                    NewMaterial.Flags |= 0x10;
+                                    NewMaterial.Unk10 = 0x00000000;
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
                     }
 
