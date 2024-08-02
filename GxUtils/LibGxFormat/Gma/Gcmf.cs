@@ -137,7 +137,6 @@ namespace LibGxFormat.Gma
                                     break;
 
                                 case "MASK":
-                                    NewMaterial.Flags |= 0x10;
                                     NewMaterial.Unk10 = 0x00000000;
                                     break;
 
