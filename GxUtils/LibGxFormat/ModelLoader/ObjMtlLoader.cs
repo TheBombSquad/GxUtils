@@ -512,6 +512,11 @@ namespace LibGxFormat.ModelLoader
             }
             materials.Add(materialName, currentLoadMaterial);
             materials[materialName].Unshaded = materialName.Contains("[UNSHADED]");
+            materials[materialName].TwoSided = materialName.Contains("[TWOSIDED]");
+            materials[materialName].NoFog = materialName.Contains("[NOFOG]");
+            materials[materialName].VertexShading = materialName.Contains("[VERTEXSHADING]");
+            materials[materialName].ScreenBlend = materialName.Contains("[SCREEN]");
+            materials[materialName].AdditiveBlend = materialName.Contains("[ADDITIVE]");
             materials[materialName].Name = materialName;
         }
 
